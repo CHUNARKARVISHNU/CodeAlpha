@@ -1,0 +1,74 @@
+import java.io.IOException;
+
+import java.util.ArrayList;
+
+import java.io.BufferedReader;
+
+import java.io.FileReader;
+
+import java.util.Random;
+
+ 
+
+public class Main {
+
+
+    // List to hold our quotes we will load in
+
+    static private ArrayList<String> listQuotes = new ArrayList<String>(0);
+
+ 
+
+    public static void main(String[] args) {
+
+        // First load the quotes into our list.
+
+        loadQuotes();
+ 
+
+        // Next, generate a random integer based on the size of the quote list. Use the integer to then access a quote from the list.
+
+        if (listQuotes.size() > 0) {
+
+            Random r = new Random();
+
+            System.out.println(listQuotes.get(r.nextInt(listQuotes.size())));
+
+        } else {
+
+            System.out.println("There are currently no quotes to read.");
+
+       }
+
+    }
+
+ 
+
+    // This function simply loads quotes from our file.
+
+    public static void loadQuotes() {
+
+        // Here we have a try-with-resources setup that will automatically close BufferedReader
+
+        try (BufferedReader bufReader = new BufferedReader(new FileReader("path_to_quotes.txt"))) {
+
+            String line;
+ 
+
+            // Read each line until we hit the end. Add each line to the list.
+
+            while ((line = bufReader.readLine()) != null) {
+
+                listQuotes.add(line);
+
+            }
+
+        } catch (IOException e) {
+
+            System.out.println("Error loading quotes. Make sure the file is readable and exists.");
+
+        }
+
+    }
+
+}
