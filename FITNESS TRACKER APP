@@ -1,0 +1,80 @@
+import java.util.Scanner;
+
+public class FitnessTrackerApp {
+    
+    // Fields to store user's fitness data
+    private static int totalSteps = 0;
+    private static double totalCalories = 0.0;
+    private static int totalExerciseMinutes = 0;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        while (true) {
+            // Show menu options
+            System.out.println("\nFitness Tracker Menu:");
+            System.out.println("1. Log Steps");
+            System.out.println("2. Log Calories Burned");
+            System.out.println("3. Log Exercise Time");
+            System.out.println("4. View Fitness Summary");
+            System.out.println("5. Exit");
+            System.out.print("Please choose an option (1-5): ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    logSteps(scanner);
+                    break;
+                case 2:
+                    logCaloriesBurned(scanner);
+                    break;
+                case 3:
+                    logExerciseTime(scanner);
+                    break;
+                case 4:
+                    showSummary();
+                    break;
+                case 5:
+                    System.out.println("Exiting the Fitness Tracker...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please choose a number between 1 and 5.");
+            }
+        }
+    }
+
+    // Method to log steps
+    private static void logSteps(Scanner scanner) {
+        System.out.print("Enter the number of steps you walked today: ");
+        int steps = scanner.nextInt();
+        totalSteps += steps;
+        System.out.println("Steps logged successfully!");
+    }
+
+    // Method to log calories burned
+    private static void logCaloriesBurned(Scanner scanner) {
+        System.out.print("Enter the number of calories burned today: ");
+        double calories = scanner.nextDouble();
+        totalCalories += calories;
+        System.out.println("Calories logged successfully!");
+    }
+
+    // Method to log exercise time
+    private static void logExerciseTime(Scanner scanner) {
+        System.out.print("Enter the duration of exercise in minutes today: ");
+        int minutes = scanner.nextInt();
+        totalExerciseMinutes += minutes;
+        System.out.println("Exercise time logged successfully!");
+    }
+
+    // Method to display fitness summary
+    private static void showSummary() {
+        System.out.println("\nFitness Summary:");
+        System.out.println("Total Steps: " + totalSteps);
+        System.out.println("Total Calories Burned: " + totalCalories);
+        System.out.println("Total Exercise Time: " + totalExerciseMinutes + " minutes");
+    }
+}
