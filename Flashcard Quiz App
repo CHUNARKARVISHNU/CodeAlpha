@@ -1,0 +1,68 @@
+import java.util.*;
+
+public class FlashcardQuizApp {
+
+    // Inner class for Flashcard
+    static class Flashcard {
+        String question;
+        String answer;
+
+        // Constructor to initialize flashcard
+        public Flashcard(String question, String answer) {
+            this.question = question;
+            this.answer = answer;
+        }
+
+        // Method to display the question
+        public void askQuestion() {
+            System.out.println("Question: " + question);
+        }
+
+        // Method to check if the answer is correct
+        public boolean checkAnswer(String userAnswer) {
+            return answer.equalsIgnoreCase(userAnswer);
+        }
+    }
+
+    // Main method to run the app
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // List to hold flashcards
+        List<Flashcard> flashcards = new ArrayList<>();
+
+        // Add some sample flashcards
+        flashcards.add(new Flashcard("What is the capital of France?", "Paris"));
+        flashcards.add(new Flashcard("What is the square root of 16?", "4"));
+        flashcards.add(new Flashcard("What is the chemical symbol for water?", "H2O"));
+        flashcards.add(new Flashcard("Who wrote 'Hamlet'?", "William Shakespeare"));
+        flashcards.add(new Flashcard("What is the largest planet in our solar system?", "Jupiter"));
+
+        int score = 0;
+
+        // Shuffle the flashcards to randomize the order
+        Collections.shuffle(flashcards);
+
+        // Start the quiz
+        System.out.println("Welcome to the Flashcard Quiz App!");
+
+        for (Flashcard flashcard : flashcards) {
+            flashcard.askQuestion();
+            System.out.print("Your answer: ");
+            String userAnswer = scanner.nextLine();
+
+            // Check if the answer is correct
+            if (flashcard.checkAnswer(userAnswer)) {
+                System.out.println("Correct!\n");
+                score++;
+            } else {
+                System.out.println("Incorrect! The correct answer was: " + flashcard.answer + "\n");
+            }
+        }
+
+        // Display the final score
+        System.out.println("You got " + score + " out of " + flashcards.size() + " correct!");
+
+        scanner.close();
+    }
+}
